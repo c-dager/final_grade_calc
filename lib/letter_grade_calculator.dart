@@ -1,4 +1,4 @@
-class numToLetterGrade{
+class LetterGradeCalculator{
   String getLetterGrade(int numGrade){
     if(isAGrade(numGrade)){
       return "A";

@@ -5,11 +5,11 @@ import 'package:test/test.dart';
 
 void main() {
   final numToLetterConverter = new LetterGradeCalculator();
-  final Map<int, String> numberAndMatchingLetterGradeList = {95: 'A', 85: 'B', 75: 'C', 65: 'D', 55: 'F'};
+  final Map<int, LetterGrade> numberAndMatchingLetterGradeList = {95: LetterGrade.A, 85: LetterGrade.B, 75: LetterGrade.C, 65: LetterGrade.D, 55: LetterGrade.F};
 
   for(MapEntry numberAndLetterGradeCombo in numberAndMatchingLetterGradeList.entries){
-    test("${numberAndLetterGradeCombo.key} is letter grade ${numberAndLetterGradeCombo.value}", () {
-      String result = numToLetterConverter.getLetterGrade(numberAndLetterGradeCombo.key);
+    test("${numberAndLetterGradeCombo.key} is ${numberAndLetterGradeCombo.value}", () {
+      LetterGrade result = numToLetterConverter.getLetterGrade(numberAndLetterGradeCombo.key);
       expect(numberAndLetterGradeCombo.value, result);
     });
   }

@@ -1,19 +1,21 @@
+enum LetterGrade {A, B, C, D, F}
+
 class LetterGradeCalculator{
-  String getLetterGrade(int numGrade){
+  LetterGrade getLetterGrade(int numGrade){
     if(isAGrade(numGrade)){
-      return "A";
+      return LetterGrade.A;
     }
     if(isBGrade(numGrade)){
-      return "B";
+      return LetterGrade.B;
     }
     if(isCGrade(numGrade)){
-      return "C";
+      return LetterGrade.C;
     }
     if(isDGrade(numGrade)){
-      return "D";
+      return LetterGrade.D;
     }
     else{
-      return "F";
+      return LetterGrade.F;
     }
   }
   bool isAGrade(numGrade){

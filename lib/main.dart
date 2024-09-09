@@ -93,9 +93,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
         SizedBox(
           width: 300.0,
           child: TextField(
-            keyboardType: TextInputType.number,
-            maxLength: 3,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            maxLength: null,
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+(\.\d*)?'))],
             controller: myController,
             maxLines: null,
           ),
@@ -104,7 +104,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
           padding: const EdgeInsets.all(20.0),
           child: ElevatedButton(onPressed: (){
             final calc = new LetterGradeCalculator();
-            LetterGrade letterGrade = calc.getLetterGrade(int.parse(myController.text));
+            LetterGrade letterGrade = calc.getLetterGrade(double.parse(myController.text));
             var letterGradeStringValue = letterGrade.toString();
             setState(() {
               displayText = letterGradeStringValue;

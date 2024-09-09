@@ -1,7 +1,7 @@
 enum LetterGrade {A, B, C, D, F}
 
 class LetterGradeCalculator{
-  LetterGrade getLetterGrade(int numGrade){
+  LetterGrade getLetterGrade(double numGrade){
     try{
       if(isAGrade(numGrade)){
         return LetterGrade.A;
@@ -34,7 +34,7 @@ class LetterGradeCalculator{
     }
   }
 
-  bool isBGrade(int numGrade) {
+  bool isBGrade(numGrade) {
     if(numGrade >= 80 && numGrade <90){
       return true;
     }
@@ -43,7 +43,7 @@ class LetterGradeCalculator{
     }
   }
 
-  bool isCGrade(int numGrade) {
+  bool isCGrade(numGrade) {
     if(numGrade >= 70 && numGrade <80){
       return true;
     }
@@ -51,7 +51,7 @@ class LetterGradeCalculator{
       return false;
     }
   }
-  bool isDGrade(int numGrade) {
+  bool isDGrade(numGrade) {
     if(numGrade >= 60 && numGrade <70){
       return true;
     }

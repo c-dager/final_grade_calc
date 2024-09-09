@@ -2,21 +2,28 @@ enum LetterGrade {A, B, C, D, F}
 
 class LetterGradeCalculator{
   LetterGrade getLetterGrade(int numGrade){
-    if(isAGrade(numGrade)){
-      return LetterGrade.A;
+    try{
+      if(isAGrade(numGrade)){
+        return LetterGrade.A;
+      }
+      if(isBGrade(numGrade)){
+        return LetterGrade.B;
+      }
+      if(isCGrade(numGrade)){
+        return LetterGrade.C;
+      }
+      if(isDGrade(numGrade)){
+        return LetterGrade.D;
+      }
+      else{
+        return LetterGrade.F;
+      }
     }
-    if(isBGrade(numGrade)){
-      return LetterGrade.B;
+    catch(e){
+      print(e);
+      rethrow;
     }
-    if(isCGrade(numGrade)){
-      return LetterGrade.C;
-    }
-    if(isDGrade(numGrade)){
-      return LetterGrade.D;
-    }
-    else{
-      return LetterGrade.F;
-    }
+
   }
   bool isAGrade(numGrade){
     if(numGrade >= 90){

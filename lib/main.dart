@@ -1,4 +1,6 @@
+import 'package:final_grade_calc/letter_grade_calculator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,11 +35,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  void _calcLetterGrade() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,34 +45,74 @@ class _MyHomePageState extends State<MyHomePage> {
 
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.all(50.0),
-              child: SizedBox(
-                width: 300.0,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter a number grade',
-                  ),
-                ),
-              ),
-            ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'Enter numeric grade below:'
+            ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: MyCustomForm(),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _calcLetterGrade,
-        tooltip: 'Calculate',
-        child: const Icon(Icons.calculate_sharp),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+ // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({super.key});
+
+  @override
+  State<MyCustomForm> createState() => _MyCustomFormState();
+}
+
+// Define a corresponding State class.
+// This class holds the data related to the Form.
+class _MyCustomFormState extends State<MyCustomForm> {
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final myController = TextEditingController();
+  String displayText = "No grade entered";
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: 300.0,
+          child: TextField(
+            keyboardType: TextInputType.number,
+            maxLength: 3,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            controller: myController,
+            maxLines: null,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: ElevatedButton(onPressed: (){
+            final calc = new LetterGradeCalculator();
+            LetterGrade letterGrade = calc.getLetterGrade(int.parse(myController.text));
+            var letterGradeStringValue = letterGrade.toString();
+            setState(() {
+              displayText = letterGradeStringValue;
+            });
+          }, child: const Text("Get Letter Grade")),
+        ),
+        Text(displayText,style: const TextStyle(fontSize: 20),)
+      ],
     );
   }
 }
